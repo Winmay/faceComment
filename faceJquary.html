@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html>
+ <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="cache-control" content="max-age=0" />
+    <meta http-equiv="cache-control" content="no-cache" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="format-detection" content="telephone=no" />
+    <title>face</title>
+    <script type="text/javascript" src="jquery-1.11.1.min.js"></script>
+    <style type="text/css">
+    body {
+        margin: 0;
+        padding: 0;
+    }
+    .pub-faces{
+        padding: 25px 20px;
+        /*background: #f0eff5;*/
+    }
+    .swiper-container {
+        width: 350px;
+        margin: auto;
+        position: relative;
+        overflow: hidden;
+    }
+    .swiper-wrapper {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        display: -webkit-box;
+        display: -moz-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-transition-property: -webkit-transform;
+        -moz-transition-property: -moz-transform;
+        -o-transition-property: -o-transform;
+        -ms-transition-property: -ms-transform;
+        transition-property: transform;
+        -webkit-box-sizing: content-box;
+        -moz-box-sizing: content-box;
+        box-sizing: content-box;
+    }
+    .swiper-slide{
+        display: block;
+        position: relative;
+        z-index: 9;
+        background: #f0eff5 no-repeat 50% 50%;
+        background-size: cover;
+
+        -webkit-flex-shrink: 0;
+        -ms-flex: 0 0 auto;
+        flex-shrink: 0;
+    }
+    .face-panel-1{
+        background-image: url(face-panel1.png);
+    }
+    .face-panel-2{
+        background-image: url(face-panel2.png);
+    }
+    .face-panel-3{
+        background-image: url(face-panel3.png);
+    }
+    .face-panel-4{
+        background-image: url(face-panel4.png);
+    }
+    .face-panel-5{
+        background-image: url(face-panel5.png);
+    }
+    .face{
+        /*display:-moz-inline-box; */
+        display: inline-block;
+        box-sizing:border-box;
+        width: 50px;
+        height: 43px;
+        margin: 0;
+        padding: 0;
+        border: 0;
+        vertical-align: baseline;
+        cursor: pointer;
+        position: relative;
+        float: left;
+    }
+    /* Pagination Styles */
+    .swiper-pagination {
+        position: relative;
+        z-index: 10;
+        margin: 8.5px auto;
+        text-align: center;
+        padding: 0;
+        -webkit-transition: 300ms;
+        -moz-transition: 300ms;
+        -o-transition: 300ms;
+        transition: 300ms;
+        -webkit-transform: translate3d(0, 0, 0);
+        -ms-transform: translate3d(0, 0, 0);
+        -o-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+    }
+    .swiper-pagination-bullet {
+        display: inline-block;
+        margin-bottom:2px;
+        margin-left: 5px;
+        background-color: #F0F0F0;
+        border-radius: 100%;
+        width: 8px;
+        height: 8px;
+        position: relative;
+    }
+    .swiper-pagination-bullet:first-child{
+        margin-left: 0;
+    }
+    .swiper-pagination-bullet-active {
+        background-color: #F95050
+    }
+    #input{
+        margin:20px 0;
+        width:100%;
+        height:50px;
+        box-sizing:border-box;
+    }
+    #contentShow{
+        margin:20px auto;
+        vertical-align: middle;
+        font-size: 16px;
+        line-height: 22px;
+    }
+    .image{
+        display: inline-block;
+        width:23px;
+        height:23px;
+        background-repeat: no-repeat;
+        background-size: 256px auto;
+        margin: 1px;
+        vertical-align: middle;
+    }
+    </style>
+ </head>
+ <body>
+    <div class='pub-faces'>
+        <div id='contentShow'></div>
+        <div>
+            <input id='input' type='text' />
+            <button id='showFace'>表情</button>
+            <button id='submit'>提交</button>
+        </div>
+        <div class="swiper-container" id='faceBag'>
+            <div class='swiper-wrapper'>
+                <div class="swiper-slide face-panel-1">
+                    <span class="face selectFace" title="微笑"></span>
+                    <span class="face selectFace" title="撇嘴"></span>
+                    <span class="face selectFace" title="色"></span>
+                    <span class="face selectFace" title="发呆"></span>
+                    <span class="face selectFace" title="得意"></span>
+                    <span class="face selectFace" title="流泪"></span>
+                    <span class="face selectFace" title="害羞"></span>
+                    <span class="face selectFace" title="闭嘴"></span>
+                    <span class="face selectFace" title="睡"></span>
+                    <span class="face selectFace" title="大哭"></span>
+                    <span class="face selectFace" title="尴尬"></span>
+                    <span class="face selectFace" title="发怒"></span>
+                    <span class="face selectFace" title="调皮"></span>
+                    <span class="face selectFace" title="呲牙"></span>
+                    <span class="face selectFace" title="惊讶"></span>
+                    <span class="face selectFace" title="难过"></span>
+                    <span class="face selectFace" title="酷"></span>
+                    <span class="face selectFace" title="冷汗"></span>
+                    <span class="face selectFace" title="抓狂"></span>
+                    <span class="face selectFace" title="吐"></span>
+                    <span class="face deleteFace" title="删除"></span>
+                </div>
+
+                <div class="swiper-slide face-panel-2">
+                    <span class="face selectFace" title="偷笑"></span>
+                    <span class="face selectFace" title="可爱"></span>
+                    <span class="face selectFace" title="白眼"></span>
+                    <span class="face selectFace" title="傲慢"></span>
+                    <span class="face selectFace" title="饥饿"></span>
+                    <span class="face selectFace" title="困"></span>
+                    <span class="face selectFace" title="惊恐"></span>
+                    <span class="face selectFace" title="流汗"></span>
+                    <span class="face selectFace" title="憨笑"></span>
+                    <span class="face selectFace" title="大兵"></span>
+                    <span class="face selectFace" title="奋斗"></span>
+                    <span class="face selectFace" title="咒骂"></span>
+                    <span class="face selectFace" title="疑问"></span>
+                    <span class="face selectFace" title="嘘"></span>
+                    <span class="face selectFace" title="晕"></span>
+                    <span class="face selectFace" title="折磨"></span>
+                    <span class="face selectFace" title="衰"></span>
+                    <span class="face selectFace" title="骷髅"></span>
+                    <span class="face selectFace" title="敲打"></span>
+                    <span class="face selectFace" title="再见"></span>
+                    <span class="face deleteFace" title="删除"></span>
+                </div>
+
+                <div class="swiper-slide face-panel-3">
+                    <span class="face selectFace" title="擦汗"></span>
+                    <span class="face selectFace" title="抠鼻"></span>
+                    <span class="face selectFace" title="鼓掌"></span>
+                    <span class="face selectFace" title="糗大了"></span>
+                    <span class="face selectFace" title="坏笑"></span>
+                    <span class="face selectFace" title="左哼哼"></span>
+                    <span class="face selectFace" title="右哼哼"></span>
+                    <span class="face selectFace" title="哈欠"></span>
+                    <span class="face selectFace" title="鄙视"></span>
+                    <span class="face selectFace" title="委屈"></span>
+                    <span class="face selectFace" title="快哭了"></span>
+                    <span class="face selectFace" title="阴险"></span>
+                    <span class="face selectFace" title="亲亲"></span>
+                    <span class="face selectFace" title="吓"></span>
+                    <span class="face selectFace" title="可怜"></span>
+                    <span class="face selectFace" title="菜刀"></span>
+                    <span class="face selectFace" title="西瓜"></span>
+                    <span class="face selectFace" title="啤酒"></span>
+                    <span class="face selectFace" title="篮球"></span>
+                    <span class="face selectFace" title="乒乓"></span>
+                    <span class="face deleteFace" title="删除"></span>
+                </div>
+
+                <div class="swiper-slide face-panel-4">
+                    <span class="face selectFace" title="咖啡"></span>
+                    <span class="face selectFace" title="饭"></span>
+                    <span class="face selectFace" title="猪头"></span>
+                    <span class="face selectFace" title="玫瑰"></span>
+                    <span class="face selectFace" title="凋谢"></span>
+                    <span class="face selectFace" title="示爱"></span>
+                    <span class="face selectFace" title="爱心"></span>
+                    <span class="face selectFace" title="心碎"></span>
+                    <span class="face selectFace" title="蛋糕"></span>
+                    <span class="face selectFace" title="闪电"></span>
+                    <span class="face selectFace" title="炸弹"></span>
+                    <span class="face selectFace" title="刀"></span>
+                    <span class="face selectFace" title="足球"></span>
+                    <span class="face selectFace" title="瓢虫"></span>
+                    <span class="face selectFace" title="便便"></span>
+                    <span class="face selectFace" title="月亮"></span>
+                    <span class="face selectFace" title="太阳"></span>
+                    <span class="face selectFace" title="礼物"></span>
+                    <span class="face selectFace" title="拥抱"></span>
+                    <span class="face selectFace" title="强"></span>
+                    <span class="face deleteFace" title="删除"></span>
+                </div>
+
+                <div class="swiper-slide face-panel-5">
+                    <span class="face selectFace" title="弱"></span>
+                    <span class="face selectFace" title="握手"></span>
+                    <span class="face selectFace" title="胜利"></span>
+                    <span class="face selectFace" title="抱拳"></span>
+                    <span class="face selectFace" title="勾引"></span>
+                    <span class="face selectFace" title="拳头"></span>
+                    <span class="face selectFace" title="差劲"></span>
+                    <span class="face selectFace" title="爱你"></span>
+                    <span class="face selectFace" title="NO"></span>
+                    <span class="face selectFace" title="OK"></span>
+                    <span class="face selectFace" title="爱情"></span>
+                    <span class="face selectFace" title="飞吻"></span>
+                    <span class="face selectFace" title="跳跳"></span>
+                    <span class="face selectFace" title="发抖"></span>
+                    <span class="face selectFace" title="怄火"></span>
+                    <span class="face selectFace" title="转圈"></span>
+                    <span class="face selectFace" title="磕头"></span>
+                    <span class="face selectFace" title="回头"></span>
+                    <span class="face selectFace" title="跳绳"></span>
+                    <span class="face selectFace" title="挥手"></span>
+                    <span class="face deleteFace" title="删除"></span>
+                </div>
+            </div>
+            <div class="swiper-pagination"></div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+    /*
+    var a = ['a', 'b',  'c']
+    var obj = {}
+    for(i = 0; i < a.length; i++){
+        obj[a[i]] = "abc" + 1
+    }
+    alert(obj.a)
+    alert(obj.b)
+    alert(obj.c)
+    */
+    var faceArr = [
+        ['微笑','撇嘴','色','发呆','得意','流泪','害羞','闭嘴','睡','大哭','尴尬','发怒','调皮','呲牙','惊讶','难过','酷','冷汗','抓狂','吐'],
+        ['偷笑','可爱','白眼','傲慢','饥饿','困','惊恐','流汗','憨笑','大兵','奋斗','咒骂','疑问','嘘','晕','折磨','衰','骷髅','敲打','再见'],
+        ['擦汗','抠鼻','鼓掌','糗大了','坏笑','左哼哼','右哼哼','哈欠','鄙视','委屈','快哭了','阴险','亲亲','吓','可怜','菜刀','西瓜','啤酒','篮球','乒乓'],
+        ['咖啡','饭','猪头','玫瑰','凋谢','示爱','爱心','心碎','蛋糕','闪电','炸弹','刀','足球','瓢虫','便便','月亮','太阳','礼物','拥抱','强'],
+        ['弱','握手','胜利','抱拳','勾引','拳头','差劲','爱你','NO','OK','爱情','飞吻','跳跳','发抖','怄火','转圈','磕头','回头','跳绳','挥手']
+    ];
+    /*
+
+    var facePosition = [
+    '-6.785px -4.5px','-43.335px -4.5px','-79.925px -4.5px','-116.495px -4.5px','-153.065px -4.5px','-189.635px -4.5px','-226.205px -4.5px',
+    '-6.785px -36.5px','-43.335px -36.5px','-79.925px -36.5px','-116.495px -36.5px','-153.065px -36.5px','-189.635px -36.5px','-226.205px -36.5px',
+    '-6.785px -68.5px','-43.335px -68.5px','-79.925px -68.5px','-116.495px -68.5px','-153.065px -68.5px','-189.635px -68.5px',]
+    */
+
+    $(document).ready(function(){
+        $("#input").keydown(function(event){
+            //13等于退格键
+            // if(event.which == 8){
+            //     var textObj = $('#input').get(0);
+            //     var value = textObj.value;
+
+            //     if(value.indexOf(']',value.length-1) != -1){
+            //         var length = value.length-2;
+            //         while(value.indexOf('[',length) == -1){
+            //             length--;
+            //         }
+            //         textObj.value = value.substring(0,length+1);
+            //     }else{
+            //         textObj.value = value.substring(0,value.length);
+            //     }
+            // }
+
+            var textObj = $('#input').get(0); 
+            if(event.which == 8){  
+                if (window.getSelection) {
+                    if ((textObj.selectionStart != undefined) && (textObj.selectionEnd != undefined) && (textObj.selectionEnd != textObj.value.length || textObj.selectionEnd - textObj.selectionStart != 0)) {
+                        return true;
+                    }else{
+                        var value = textObj.value;
+                        if(value.indexOf(']',value.length-1) != -1){
+                            var length = value.length-2;
+                            while(value.indexOf('[',length) == -1){
+                                length--;
+                            }
+                            textObj.value = value.substring(0,length+1);
+                        }else{
+                            textObj.value = value.substring(0);
+                        }
+                    }
+                }
+            } 
+
+        });
+    });
+
+        
+    $('.deleteFace').click(function(e){
+        var textObj = $('#input').get(0);
+        var value = textObj.value;
+
+        if(value.indexOf(']',value.length-1) != -1){
+            var length = value.length-2;
+            while(value.indexOf('[',length) == -1){
+                length--;
+            }
+            textObj.value = value.substring(0,length);
+        }else{
+            textObj.value = value.substring(0,value.length-1);
+        }
+        e.stopPropagation();
+    });
+    
+    $('.selectFace').click(function(e){
+        var title = $(this).attr("title");
+        insertAtCaret('['+title+']');
+        e.stopPropagation();
+    });
+
+    $('#submit').click(function(e){
+        var str = $("#input").val();
+        $("#contentShow").html(replace_em(str));
+        e.stopPropagation();
+    });
+
+    function insertAtCaret(textFeildValue){ 
+        var textObj = $('#input').get(0); 
+        if(document.all && textObj.createTextRange && textObj.caretPos){ 
+            var caretPos=textObj.caretPos; 
+            caretPos.text = caretPos.text.charAt(caretPos.text.length-1) == '' ? 
+            textFeildValue+'' : textFeildValue; 
+            console.log('a');
+        } else if(textObj.setSelectionRange){ 
+            var rangeStart=textObj.selectionStart; 
+            var rangeEnd=textObj.selectionEnd; 
+            var tempStr1=textObj.value.substring(0,rangeStart); 
+            var tempStr2=textObj.value.substring(rangeEnd); 
+            textObj.value=tempStr1+textFeildValue+tempStr2; 
+            textObj.focus(); 
+            var len=textFeildValue.length; 
+            textObj.setSelectionRange(rangeStart+len,rangeStart+len); 
+            textObj.blur(); 
+            console.log('b');
+        }else{ 
+            textObj.value+=textFeildValue; 
+            console.log('c');
+        } 
+    } 
+
+    function replace_em(str){
+        str = str.replace(/\</g,'&lt;');
+        str = str.replace(/\>/g,'&gt;');
+        str = str.replace(/\n/g,'<br/>');
+
+        for(var i=0;i!=faceArr.length;++i){
+            for(var j=0;j!=faceArr[i].length;++j){
+
+                var pos = str.indexOf('['+faceArr[i][j]+']');
+
+                while(pos != -1){
+                    var facePositionX,facePositionY;
+                    if(j<7){
+                        facePositionX = 36.57*j+6.785;
+                        facePositionY = 4.5;
+                    }else if(j<14){
+                        facePositionX = 36.57*(j-7)+6.785;
+                        facePositionY = 32+4.5;
+                    }else{
+                        facePositionX = 36.57*(j-14)+6.785;
+                        facePositionY = 32*2+4.5;
+                    }
+                    str = str.replace('['+faceArr[i][j]+']','<span class="image" style="background-image:url(face-panel'+(i+1)+'.png);background-position:-'+facePositionX+'px -'+facePositionY+'px" ></span>');
+
+                    pos = str.indexOf('['+faceArr[i][j]+']', pos + 1);
+                }
+
+            }
+        }
+
+        return str;
+    }
+
+    
+    $('#showFace').click(function(e){
+        $('#faceBag').css('display','block');
+        e.stopPropagation();
+    });
+    $(document).click(function(){
+        $('#faceBag').hide();
+        // $('#faceBag').remove();
+    });
+        
+    </script>
+
+    <!-- Swiper JS -->
+    <script src="swiper.js"></script>
+
+    <!-- Initialize Swiper -->
+    <script type="text/javascript">
+    var swiper = new Swiper('.swiper-container', {
+        pagination: '.swiper-pagination',
+        paginationClickable: true,
+        speed: 600,
+    });
+    </script>
+ </body>
+</html>

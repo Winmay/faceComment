@@ -279,6 +279,7 @@
         ['弱','握手','胜利','抱拳','勾引','拳头','差劲','爱你','NO','OK','爱情','飞吻','跳跳','发抖','怄火','转圈','磕头','回头','跳绳','挥手']
     ];
 
+    //根据图片的大小，计算span点击浮层的长宽值
     function eventHandler(){
         var imgWidth = document.getElementsByClassName('swiper-slide')[0].offsetWidth;
         var spanWidth = parseInt(imgWidth / 7);
@@ -296,10 +297,12 @@
         document.addEventListener('DOMContentLoaded', eventHandler);
     }
 
+    //按下键盘中的删除按钮，设置它的删除字符规则
     function keydown(event){
         var textObj = document.getElementById('input'); 
         if(event.which == 8){  
             if (window.getSelection) {
+                //判断是否全选
                 if ((textObj.selectionStart != undefined) && (textObj.selectionEnd != undefined) && (textObj.selectionEnd != textObj.value.length || textObj.selectionEnd - textObj.selectionStart != 0)) {
                     return true;
                 }else{
@@ -318,6 +321,7 @@
         } 
     }
 
+    //点击图片中的删除按钮，进行删除字符操作
     function deleteFace(self,event){
         var textObj = document.getElementById('input');
         var value = textObj.value;
@@ -334,18 +338,14 @@
         event.stopPropagation();
     }
 
+    //点击图片中的表情，进行表情的选择并显示表情的名称
     function selectFace(self,event){
         var title = self.getAttribute("title");
         insertAtCaret('['+title+']');
         event.stopPropagation();
     }
 
-    document.getElementById('submit').addEventListener('click',function(event){
-        var str = document.getElementById('input').value;
-        document.getElementById('contentShow').innerHTML = replace_em(str);
-        event.stopPropagation();
-    },false);
-
+    //规定表情添加的规则
     function insertAtCaret(textFeildValue){ 
         var textObj = document.getElementById('input'); 
         if(document.all && textObj.createTextRange && textObj.caretPos){ 
@@ -370,6 +370,16 @@
         } 
     } 
 
+    //提交按钮添加点击事件
+    document.getElementById('submit').addEventListener('click',function(event){
+        //获取输入框中的数据
+        var str = document.getElementById('input').value;
+        //输入框中的数据经过处理后传到显示框中，把表情显示出来
+        document.getElementById('contentShow').innerHTML = replace_em(str);
+        event.stopPropagation();
+    },false);
+
+    //计算对应表情在图片中的位置
     function replace_em(str){
         str = str.replace(/\</g,'&lt;');
         str = str.replace(/\>/g,'&gt;');
